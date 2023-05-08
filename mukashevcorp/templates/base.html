@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <title>{% block title %}{% endblock %} - MukashevCorp</title>
     </head>
     <body>
+        <script src="{% static 'js/jquery-3.6.4.js' %}"></script>
         <header>
-            {% include 'includes/header.html' %}
+            {% if start %}
+              {% include 'hello/preloader.html' %}
+            {% else %}
+              {% include 'includes/header.html' %}
+            {% endif %}
         </header>
-        <main>
+        <main style="display:none;">
             {% block content %}{% endblock %}
         </main>
         <footer>
             {% include 'includes/footer.html' %}
         </footer>
+        <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     </body>
 </html>

@@ -1,12 +1,24 @@
+from django.apps import apps
 from django.shortcuts import render
+from mukashevcorp.settings import INSTALLED_APPS
 
 # Create your views here.
 
+
 def index(request):
+    app_configs = apps.get_app_configs()
+    modules = []
+
+    for app_config in app_configs:
+        if not 'django' in app_config.name:
+            modules.append(app_config)
+
     context = {
+        'modules': modules[1:],
         'start': True
     }
     return render(request, 'hello/index.html', context)
+
 
 def hello(request):
     context = {

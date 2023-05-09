@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}Стартовая{% endblock %}
+{% block title %}
+  Стартовая
+{% endblock %}
 
 {% block content %}
-<h1>Привет</h1>
+  {% load static %}
+  <div class="container">
+    <div class="row">
+      {% for module in modules %}
+        <div class="col my-3">
+          <div class="card text-bg-dark" style="width: 18rem;">
+            <img src="{% static 'icons/' %}{{ module.icon }}" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ module.verbose_name }}</h5>
+              <p class="card-text">{{ module.Config.description }}</p>
+              <a href="{{ module.name }}/" class="btn btn-light">Вход</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block header %}
-{% include 'hello/preloader.html' %}
+  {% include 'hello/preloader.html' %}
 {% endblock %}

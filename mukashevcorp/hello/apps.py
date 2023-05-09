@@ -4,3 +4,7 @@ from django.apps import AppConfig
 class HelloConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'hello'
+    verbose_name = 'Старт'
+
+    class Config:
+        description = 'test'

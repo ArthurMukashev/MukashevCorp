@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.shortcuts import render
-from mukashevcorp.settings import INSTALLED_APPS
+from django.views.generic.base import TemplateView
+
 
 # Create your views here.
 
@@ -10,7 +11,7 @@ def index(request):
     modules = []
 
     for app_config in app_configs:
-        if not 'django' in app_config.name:
+        if 'django' not in app_config.name:
             modules.append(app_config)
 
     context = {

@@ -14,7 +14,7 @@
               {% include 'includes/header.html' %}
             {% endif %}
         </header>
-        <main style="display:none;">
+        <main {% if start %} style="display:none;" {% endif %}>
             {% block content %}{% endblock %}
         </main>
         <footer>

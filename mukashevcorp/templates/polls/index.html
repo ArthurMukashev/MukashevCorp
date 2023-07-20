@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Голосование{% endblock %}
+{% block content %}
+<div class="container">
+    {% if questions %}
+        <div class="list-group list-group-numbered">
+        {% for question in questions %}
+            <a href="{% url 'polls:detail' question.id %}" class="list-group-item list-group-item-action">{{ question }}</a>
+        {% endfor %}
+        </div>
+    {% else %}
+    <p>Доступных голосований нет.</p>
+    {% endif %}
+</div>
+{% endblock %}

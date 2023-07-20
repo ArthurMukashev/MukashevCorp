@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Фрагменты отчетов{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-group d-flex justify-content-between align-items-start">
+        <a href="{% url 'reports:index' %}" class="btn btn-info">Назад</a>
+
+        <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Просмотр отчета
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'reports:total' lastLastYear %}">За {{ lastLastYear }} год</a></li>
+                <li><a class="dropdown-item" href="{% url 'reports:total' lastYear %}">За {{ lastYear }} год</a></li>
+                <li><a class="dropdown-item" href="{% url 'reports:total' currentYear %}">За {{ currentYear }} год</a></li>
+                <li><a class="dropdown-item" href="{% url 'reports:total' nextYear %}">За {{ nextYear }} год</a></li>
+                <li><a class="dropdown-item" href="{% url 'reports:total' nextNextYear %}">За {{ nextNextYear }} год</a></li>
+            </ul>
+        </div>
+        <a href="{% url 'reports:add' %}" class="btn btn-success">Добавить фрагмент отчета</a>
+
+    </div>
+
+
+    {% if ReportFragments %}
+    <ul class="list-group my-4">
+        {% for ReportFragment in ReportFragments %}
+        <li class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">
+            <span>
+                <b>{{ ReportFragment.report_name }}</b>
+                <i>[Фрагмент отчета за {{ ReportFragment.report_year }} год]</i>
+                <u>Индекс сортировки: {{ ReportFragment.report_order }} (чем меньше, тем выше отображается в отчете)</u>
+            </span>
+            <div class="btn-group">
+                <a href="{% url 'reports:update' ReportFragment.id %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'reports:delete' ReportFragment.id %}" class="btn btn-danger">Удалить</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

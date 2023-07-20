@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтвердите удаление{% endblock %}
+{% block content %}
+<div class="container">
+    <form method="post">{% csrf_token %}
+        <p>Вы уверены? Отменить это действие будет невозможно!</p>
+        <button class="btn btn-success" type="submit">Подтвердить</button>
+    </form>
+</div>
+{% endblock %}

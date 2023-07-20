@@ -4,22 +4,22 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <title>{% block title %}{% endblock %} - MukashevCorp</title>
+
     </head>
     <body>
         <script src="{% static 'js/jquery-3.6.4.js' %}"></script>
-        <header>
-            {% if start %}
-              {% include 'hello/preloader.html' %}
-            {% else %}
-              {% include 'includes/header.html' %}
-            {% endif %}
-        </header>
+        {% if start %}
+          {% include 'hello/preloader.html' %}
+        {% else %}
+          {% include 'includes/header.html' %}
+        {% endif %}
         <main {% if start %} style="display:none;" {% endif %}>
             {% block content %}{% endblock %}
         </main>
-        <footer>
+
+        {% if not start %}
             {% include 'includes/footer.html' %}
-        </footer>
+        {% endif %}
         <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     </body>
 </html>

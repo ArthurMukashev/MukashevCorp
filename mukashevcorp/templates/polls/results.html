@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Результаты вопроса № {{ question.id }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Вопрос № {{ question.id }}</h4>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ question.question_text }}</p>
+            <ul>
+            {% for choice in question.choice_set.all %}
+                <li>{{ choice.choice_text }} -- {{ choice.votes }} голос{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+            </ul>
+            <a href="{% url 'polls:detail' question.id %}">Проголосовать еще раз?</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

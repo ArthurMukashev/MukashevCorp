@@ -1,8 +1,21 @@
-<nav class="container navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      Mukashev Corp
-    </a>
-  </div>
-</nav>
+{% load static %}
+<header class="container">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'icons/logo.jpg' %}" alt="Logo" width="30" height="24"
+                     class="d-inline-block align-text-top">
+                Mukashev Corp.
+            </a>
+            <div>
+                {% if request.user.is_authenticated %}
+                <span>{{ request.user }}</span>
+                <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a>
+                {% else %}
+                <span>Не авторизован</span>
+                <a href="{% url 'login' %}" class="btn btn-success">Вход в систему</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>

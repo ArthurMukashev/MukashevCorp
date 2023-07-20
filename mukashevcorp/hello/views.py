@@ -15,7 +15,7 @@ def index(request):
             modules.append(app_config)
 
     context = {
-        'modules': modules[1:],
+        'modules': modules[2:],
         'start': True
     }
     return render(request, 'hello/index.html', context)

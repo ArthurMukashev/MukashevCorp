@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Отчет{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="btn-group d-flex justify-content-between align-items-start">
+        <a href="{% url 'reports:index' %}" class="btn btn-info">В меню</a>
+        <a href="{% url 'reports:generate_pdf' year %}" class="btn btn-success" target="_blank">Генерация PDF</a>
+    </div>
+    <h1>Отчет за {{ year }} год</h1>
+    {% autoescape off %}
+    {% for ReportFragment in ReportFragments %}
+        {{ ReportFragment }}
+    {% endfor %}
+    {% endautoescape %}
+</div>
+
+{% endblock %}

@@ -2,7 +2,6 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from .models import ReportFragment
-from .services import generate_pdf
 
 
 # Create your views here.
@@ -36,10 +35,6 @@ class TotalView(generic.ListView):
         year = self.kwargs.get('year', None)
         context['year'] = year
         return context
-
-
-def download_generated_pdf(request, year):
-    return generate_pdf.getpdf(request, year)
 
 
 class ManageView(generic.ListView):

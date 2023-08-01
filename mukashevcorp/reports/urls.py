@@ -13,5 +13,4 @@ urlpatterns = [
     path('manage/<int:pk>/delete/', login_required(views.ReportDeleteView.as_view()), name='delete'),
 
     path('total/<int:year>/', views.TotalView.as_view(), name='total'),
-    path('total/generate/<int:year>/', views.download_generated_pdf, name='generate_pdf')
 ]

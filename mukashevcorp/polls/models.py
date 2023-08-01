@@ -10,8 +10,6 @@ from django.utils import timezone
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('дата публикации')
-    verbose_name = 'Вопрос'
-    verbose_name_plural = 'Вопросы'
 
     @admin.display(
         boolean=True,
@@ -26,6 +24,10 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -34,3 +36,7 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+    class Meta:
+        verbose_name = 'Вариант ответа'
+        verbose_name_plural = 'Варианты ответов'

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
+from filebrowser.sites import site
 
 urlpatterns = [
     path('', include('hello.urls')),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('about/', include('about.urls', namespace='about')),
     path('polls/', include('polls.urls', namespace='polls')),
     path('reports/', include('reports.urls', namespace='reports')),
+    path('diagram_editor/', include('diagram_editor.urls', namespace='diagram_editor')),
     path('zoo/', include('zoo.urls', namespace='zoo'))
 ]

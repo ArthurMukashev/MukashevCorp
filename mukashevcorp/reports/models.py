@@ -19,9 +19,6 @@ class ReportFragment(models.Model):
         (cur_year + 2, cur_year + 2),
     )
 
-    verbose_name_plural = 'Фрагменты отчетов'
-    verbose_name = 'Фрагмент отчета'
-
     report_name = models.CharField(
         'Название фрагмента',
         max_length=255
@@ -53,3 +50,5 @@ class ReportFragment(models.Model):
 
     class Meta:
         ordering = ('report_order',)
+        verbose_name_plural = 'Фрагменты отчетов'
+        verbose_name = 'Фрагмент отчета'

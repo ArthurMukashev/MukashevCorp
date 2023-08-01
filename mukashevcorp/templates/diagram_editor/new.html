@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Новая ИС{% endblock %}
+{% block content %}
+{% load user_filters %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">
+                Новая ИС
+                <a href="{% url 'diagram_editor:index' %}" class="btn-close text-decoration-none float-end"></a>
+            </h4>
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">{{ error|escape }}</div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">{{ error|escape }}</div>
+                {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+
+                {% for field in form %}
+                {% if field.label %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% endif %}
+
+                {{ field|addclass:'form-control' }}
+                {% endfor %}
+                <button class="btn btn-success my-4" type="submit">Сохранить</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

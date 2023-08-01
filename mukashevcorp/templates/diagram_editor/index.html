@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}Редактор диаграмм{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control">
+                <button type="button" class="btn btn-secondary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control">
+                <option value="" selected>Сортировка по</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-info w-100">Фильтр</button>
+        </div>
+    </div>
+
+    {% for scheme in schemes %}
+
+    <div class="card m-auto mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <small>{{ scheme.name }}</small>
+                        </li>
+                        <li class="list-group-item">
+                            <small>{{ scheme.desc_short }}</small>
+                        </li>
+                        <li class="list-group-item">
+                            <small class="text-muted">Последнее редактирование {{ scheme.history.last.history_date }}</small>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ forloop.counter }}"
+                            aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                        Подсеть/сетевой адрес
+                    </button>
+                    {% if request.user == scheme.author %}
+                    <a href="{% url 'diagram_editor:edit' scheme.pk %}" class="btn btn-warning">Редактировать</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="collapse{{ forloop.counter }}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">Превью схемы</div>
+                            <div class="col-md-6">Превью матрицы</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-success">Загрузить</button>
+                        <button class="btn btn-info">История</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">Последнее редактирование</li>
+                            <li class="list-group-item">{{ scheme.history.last.history_date }}</li>
+                            <li class="list-group-item">{{ scheme.history.last.history_user }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        Доп атрибуты?
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Связана с:</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-success">+</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Доступна:</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-success">+</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-success">Ссылка</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-danger">В архив</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'diagram_editor:new' %}" class="btn btn-success">Новая</a>
+    <button class="btn btn-warning">Связи</button>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Голосование{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">test Form</h4>
+        </div>
+        <div class="card-body">
+            {% if not created %}
+
+            <form method="POST">
+                {% csrf_token %}
+            <hr>
+            {{ form.as_p }}
+            <hr>
+                <button class="btn btn-success" type="submit">Create</button>
+            </form>
+            {% else %}
+            <div class="alert alert-info">
+                {{ title }} - {{ content }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -6,7 +6,13 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                Новая ИС
+                {% with request.resolver_match.url_name as url_name %}
+                {% if url_name == 'edit' %}
+                    Редактировать ИС
+                {% else %}
+                    Новая ИС
+                {% endif %}
+                {% endwith %}
                 <a href="{% url 'diagram_editor:index' %}" class="btn-close text-decoration-none float-end"></a>
             </h4>
         </div>
@@ -24,15 +30,100 @@
                 {% endif %}
                 {% csrf_token %}
 
-                {% for field in form %}
-                {% if field.label %}
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% endif %}
+                <div class="mb-3">
+                    <label class="form-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                    {{ form.name|addclass:'form-control' }}
+                </div>
 
-                {{ field|addclass:'form-control' }}
-                {% endfor %}
+                <div class="mb-3">
+                    <label class="form-label" for="{{ form.desc_short.id_for_label }}">
+                        {{ form.desc_short.label }}
+                    </label>
+                    {{ form.desc_short|addclass:'form-control' }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="{{ form.description.id_for_label }}">
+                        {{ form.description.label }}
+                    </label>
+                    {{ form.description|addclass:'form-control' }}
+                </div>
+
+                <div class="row mb-3 text-center">
+                    <div class="col-md-6">
+                        <label class="form-label">{{ form.linked.label }}</label>
+                        {% for pk, choice in form.linked.field.widget.choices %}
+                        <div class="form-check form-switch">
+                            <input name="linked" type="checkbox" class="form-check-input"
+                                   value="{{ pk }}"
+                                   id="id_linked_{{ forloop.counter0 }}">
+                            <label class="form-check-label" for="id_linked_{{ forloop.counter0 }}">
+                                {{ choice }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">{{ form.permitted_groups.label }}</label>
+                        {% for pk, choice in form.permitted_groups.field.widget.choices %}
+                        <div class="form-check form-switch">
+                            <input name="permitted_groups" type="checkbox" class="form-check-input"
+                                   value="{{ pk }}"
+                                   id="id_permitted_groups_{{ forloop.counter0 }}">
+                            <label class="form-check-label" for="id_permitted_groups_{{ forloop.counter0 }}">
+                                {{ choice }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row mb-3 text-center">
+                    <div class="col-md-4">
+                        <button class="btn btn-info">Создать схему</button>
+                    </div>
+                    <div class="col-md-4">
+                        ИЛИ
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success">Загрузить схему</button>
+                    </div>
+                </div>
+
+                <div class="row mb-3 text-center">
+                    <div class="col-md-4">
+                        <button class="btn btn-info">Создать матрицу</button>
+                    </div>
+                    <div class="col-md-4">
+                        ИЛИ
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success">Загрузить матрицу</button>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="form-label">Дополнительные атрибуты</label>
+                    <table class="table table-bordered table-hover text-center">
+                        <thead>
+                        <tr>
+                            <th>Атрибут</th>
+                            <th>Значение</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input class="form-control"></td>
+                            <td><input class="form-control"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
                 <button class="btn btn-success my-4" type="submit">Сохранить</button>
-
             </form>
         </div>
     </div>

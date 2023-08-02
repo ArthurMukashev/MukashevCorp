@@ -4,10 +4,24 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from .forms import ArticleForm
 from .models import Choice, Question
 
 
 # Create your views here.
+
+def create(request):
+    context = {
+        'form': ArticleForm()
+    }
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        context['title'] = title
+        context['content'] = content
+        context['created'] = True
+    return render(request, 'polls/create.html', context)
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'

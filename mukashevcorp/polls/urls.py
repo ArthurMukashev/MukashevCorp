@@ -13,5 +13,6 @@ urlpatterns = [
     path('', login_required(views.IndexView.as_view()), name='index'),
     path('<int:pk>/', login_required(views.DetailView.as_view()), name='detail'),
     path('<int:pk>/results/', login_required(views.ResultsView.as_view()), name='results'),
-    path('<int:question_id>/vote/', login_required(views.vote), name='vote')
+    path('<int:question_id>/vote/', login_required(views.vote), name='vote'),
+    path('create/', views.create, name='create')
 ]

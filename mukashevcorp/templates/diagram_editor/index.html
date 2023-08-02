@@ -51,7 +51,7 @@
         </div>
         <div class="collapse" id="collapse{{ forloop.counter }}">
             <div class="card-body">
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-6">Превью схемы</div>
@@ -63,7 +63,7 @@
                         <button class="btn btn-info">История</button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <ul class="list-group">
                             <li class="list-group-item">Последнее редактирование</li>
@@ -75,9 +75,12 @@
                         Доп атрибуты?
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <h4>Связана с:</h4>
+                        <div class="alert alert-info">
+                            {{ scheme.linked }}
+                        </div>
                         <ul class="list-group">
                             <li class="list-group-item"></li>
                             <li class="list-group-item"></li>
@@ -88,7 +91,7 @@
                         <button class="btn btn-success">+</button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <h4>Доступна:</h4>
                         <ul class="list-group">
